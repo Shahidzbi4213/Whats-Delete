@@ -70,8 +70,9 @@ dependencies {
     // LiveData
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.5.1"
 
-    //GSON
-    implementation 'com.google.code.gson:gson:2.10'
+    //Splash API
+    implementation 'androidx.core:core-splashscreen:1.0.0'
+
 
 }
 

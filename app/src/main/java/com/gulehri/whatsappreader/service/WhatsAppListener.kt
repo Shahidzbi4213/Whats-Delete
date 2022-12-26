@@ -19,8 +19,8 @@ class WhatsAppListener @Inject constructor() : NotificationListenerService() {
     lateinit var repository: NotificationRepository
 
 
-    override fun onNotificationRemoved(sbn: StatusBarNotification?) {
-        super.onNotificationRemoved(sbn)
+    override fun onNotificationPosted(sbn: StatusBarNotification?, rankingMap: RankingMap?) {
+        super.onNotificationPosted(sbn, rankingMap)
 
         if (sbn?.packageName in arrayOf(
                 Constants.WHATSAPP,
@@ -29,6 +29,5 @@ class WhatsAppListener @Inject constructor() : NotificationListenerService() {
         ) repository.saveNotifications(sbn)
 
     }
-
 
 }

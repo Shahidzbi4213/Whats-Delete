@@ -1,6 +1,7 @@
 package com.gulehri.whatsappreader.ui.adapters
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -39,6 +40,12 @@ class SaveShowAdapter :
                 tvTitle.text = currentItem.title
                 tvMessage.text = currentItem.text
                 tvDateTime.text = currentItem.postTime
+
+                currentItem.detail?.let {
+                    tvMessageDetails.text = it
+                } ?: tvMessageDetails.apply {
+                    visibility = View.INVISIBLE
+                }
             }
         }
 

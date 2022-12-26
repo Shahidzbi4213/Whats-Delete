@@ -1,5 +1,6 @@
 package com.gulehri.whatsappreader.data.repositories
 
+import android.app.Notification
 import android.os.Build
 import android.service.notification.StatusBarNotification
 import androidx.annotation.RequiresApi
@@ -20,10 +21,12 @@ class NotificationRepository @Inject constructor(private val db: AppDatabase) {
     val readNotifications = db.mainDao().getAll()
 
 
+
     fun saveNotifications(sbn: StatusBarNotification?) {
         val notification = SingleNotification(
-            title = sbn?.notification?.extras?.getString("android.title"),
-            text = sbn?.notification?.extras?.getString("android.text"),
+            title = sbn?.notification?.extras?.getCharSequence(Notification.EXTRA_TITLE).toString(),
+            text = sbn?.notification?.extras?.getCharSequence(Notification.EXTRA_TEXT).toString(),
+            detail = null,
             postTime = SimpleDateFormat(
                 "dd/MM/yyyy  hh:mm:ss a",
                 Locale.ENGLISH

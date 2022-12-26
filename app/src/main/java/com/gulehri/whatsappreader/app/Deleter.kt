@@ -7,4 +7,6 @@ import dagger.hilt.android.HiltAndroidApp
 // Created by Shahid Iqbal on 12/26/2022.
 
 @HiltAndroidApp
-class Deleter : Application() {}
+class Deleter : Application() {
+
+}

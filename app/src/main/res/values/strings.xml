@@ -59,4 +59,9 @@
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <string name="service_name">Delete Reader</string>
+    <string name="theme_header">Theme</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="util_header">Utils</string>
+    <string name="delete">Clear all notifications</string>
+    <string name="version_title">Whats Reader</string>
 </resources>
