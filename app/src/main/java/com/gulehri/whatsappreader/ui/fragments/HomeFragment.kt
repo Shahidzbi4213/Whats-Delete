@@ -9,9 +9,13 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import com.gulehri.whatsappreader.R
 import com.gulehri.whatsappreader.data.viewmodels.NotificationViewModel
 import com.gulehri.whatsappreader.databinding.FragmentHomeBinding
 import com.gulehri.whatsappreader.ui.adapters.SaveShowAdapter
+import com.gulehri.whatsappreader.utils.Extensions.hide
+import com.gulehri.whatsappreader.utils.Extensions.setBarTitle
+import com.gulehri.whatsappreader.utils.Extensions.show
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -40,17 +44,30 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        requireActivity().setBarTitle(getString(R.string.action_home))
+
         setAdapter()
+        bindObserver()
+
+    }
+
+    private fun bindObserver() {
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
 
-                viewModel.readNotification.collect() {
+                viewModel.readNotification.collect {
 
-                    if (it.isNotEmpty()) adapter.submitList(it)
+                    if (it.isNotEmpty()) {
+                        adapter.submitList(it)
+                        binding.animationView.hide()
+                        binding.rvSaved.show()
+                    } else {
+                        binding.animationView.show()
+                        binding.rvSaved.hide()
+                    }
                 }
             }
         }
-
     }
 
     private fun setAdapter() {

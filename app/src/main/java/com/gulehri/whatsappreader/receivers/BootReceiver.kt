@@ -16,8 +16,10 @@ class BootReceiver @Inject constructor() : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
 
         if (intent.action == Intent.ACTION_BOOT_COMPLETED) {
-            val serviceIntent = Intent(context, WhatsAppListener::class.java)
-            context.startService(serviceIntent)
+            Intent(context, WhatsAppListener::class.java).apply {
+                context.startService(this)
+            }
+
         }
     }
 }

@@ -1,7 +1,10 @@
 package com.gulehri.whatsappreader.service
 
+import android.os.Build
 import android.service.notification.NotificationListenerService
 import android.service.notification.StatusBarNotification
+import android.util.Log
+import androidx.annotation.RequiresApi
 import com.gulehri.whatsappreader.data.repositories.NotificationRepository
 import com.gulehri.whatsappreader.utils.Constants
 import dagger.hilt.android.AndroidEntryPoint
@@ -19,14 +22,18 @@ class WhatsAppListener @Inject constructor() : NotificationListenerService() {
     lateinit var repository: NotificationRepository
 
 
-    override fun onNotificationPosted(sbn: StatusBarNotification?, rankingMap: RankingMap?) {
-        super.onNotificationPosted(sbn, rankingMap)
-
+    @RequiresApi(Build.VERSION_CODES.M)
+    override fun onNotificationRemoved(sbn: StatusBarNotification?) {
         if (sbn?.packageName in arrayOf(
                 Constants.WHATSAPP,
                 Constants.WHATSAPP_BUSINESS
             )
         ) repository.saveNotifications(sbn)
+
+
+        Log.d("TAGG", "onNotificationRemoved: ${sbn?.notification?.extras} ")
+
+        super.onNotificationRemoved(sbn)
 
     }
 

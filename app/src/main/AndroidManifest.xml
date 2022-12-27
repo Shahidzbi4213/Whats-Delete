@@ -43,6 +43,7 @@
         </service>
 
 
+
         <receiver
             android:name=".receivers.BootReceiver"
             android:enabled="true"
@@ -52,14 +53,6 @@
             </intent-filter>
         </receiver>
 
-        <receiver
-            android:name=".receivers.DataUpdater"
-            android:exported="true"
-            tools:ignore="ExportedReceiver">
-            <intent-filter>
-                <action android:name="com.example.myapp.UPDATE_DATABASE" />
-            </intent-filter>
-        </receiver>
 
     </application>
 

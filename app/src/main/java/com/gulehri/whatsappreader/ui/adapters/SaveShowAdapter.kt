@@ -1,13 +1,13 @@
 package com.gulehri.whatsappreader.ui.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.gulehri.whatsappreader.data.models.SingleNotification
 import com.gulehri.whatsappreader.databinding.SingleNotificationItemBinding
+import com.gulehri.whatsappreader.utils.Extensions.hide
 
 
 // Created by Shahid Iqbal on 12/26/2022.
@@ -41,11 +41,10 @@ class SaveShowAdapter :
                 tvMessage.text = currentItem.text
                 tvDateTime.text = currentItem.postTime
 
-                currentItem.detail?.let {
-                    tvMessageDetails.text = it
-                } ?: tvMessageDetails.apply {
-                    visibility = View.INVISIBLE
-                }
+                if (!currentItem.detail.isNullOrEmpty()) {
+                    tvMessageDetails.text = currentItem.detail
+                } else tvMessageDetails.hide()
+
             }
         }
 

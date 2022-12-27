@@ -26,4 +26,8 @@ class NotificationViewModel @Inject constructor(private val repo: NotificationRe
     val readNotification = repo.readNotifications.stateIn(
         viewModelScope, SharingStarted.Lazily, emptyList()
     )
+
+    fun deleteAll() = viewModelScope.launch {
+        repo.deleteAll()
+    }
 }

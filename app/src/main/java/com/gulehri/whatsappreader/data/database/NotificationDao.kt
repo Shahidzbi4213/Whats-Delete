@@ -16,6 +16,9 @@ interface NotificationDao {
     @Delete
     suspend fun delete(singleNotification: SingleNotification)
 
+    @Query("DELETE  FROM notifications")
+    suspend fun deleteAll()
+
     @Query("SELECT * FROM notifications order by postTime")
     fun getAll(): Flow<List<SingleNotification>>
 

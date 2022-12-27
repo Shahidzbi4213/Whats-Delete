@@ -4,9 +4,17 @@
 
         <SwitchPreferenceCompat
             app:allowDividerBelow="true"
+            app:defaultValue="false"
             app:key="dark"
             app:title="@string/dark_mode" />
 
+
+        <Preference
+            app:allowDividerAbove="true"
+            app:allowDividerBelow="true"
+            app:key="delete"
+            app:summary="By clicking on this all your store notification will be deleted."
+            app:title="Delete Data" />
     </PreferenceCategory>
 
 </PreferenceScreen>

@@ -11,7 +11,7 @@ data class SingleNotification(
 
     val title: String?,
     val text: String?,
-    val detail:String?,
+    val detail: String?,
     @PrimaryKey
     val postTime: String,
 )

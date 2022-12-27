@@ -74,6 +74,10 @@ dependencies {
     implementation 'androidx.core:core-splashscreen:1.0.0'
 
 
+    //Lottie Animation
+    implementation 'com.airbnb.android:lottie:5.2.0'
+
+
 }
 
 // Allow references to generated code
