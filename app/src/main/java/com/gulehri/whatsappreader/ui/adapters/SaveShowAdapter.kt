@@ -41,9 +41,9 @@ class SaveShowAdapter :
                 tvMessage.text = currentItem.text
                 tvDateTime.text = currentItem.postTime
 
-                if (!currentItem.detail.isNullOrEmpty()) {
-                    tvMessageDetails.text = currentItem.detail
-                } else tvMessageDetails.hide()
+                  tvMessageDetails.hide()
+
+                imageView.setImageBitmap(currentItem.detail)
 
             }
         }

@@ -1,9 +1,10 @@
 package com.gulehri.whatsappreader.data.repositories
 
+import android.annotation.SuppressLint
 import android.app.Notification
 import android.content.Context
-import android.os.Build
 import android.service.notification.StatusBarNotification
+import androidx.core.graphics.drawable.toBitmap
 import com.gulehri.whatsappreader.data.database.AppDatabase
 import com.gulehri.whatsappreader.data.models.SingleNotification
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -24,30 +25,26 @@ class NotificationRepository @Inject constructor(
     val readNotifications = db.mainDao().getAll()
 
 
+    @SuppressLint("NewApi")
     fun saveNotifications(sbn: StatusBarNotification?) {
         sbn?.notification?.extras?.let {
 
             val user = it.getString(Notification.EXTRA_TITLE).toString()
-            val message = it.getString(Notification.EXTRA_TEXT) ?: ""
-            val detailMessage = it.getCharSequenceArray(Notification.EXTRA_TEXT_LINES)?.joinToString("\n")
-
+            val message = it.getString(Notification.EXTRA_TEXT)
+            val icon = sbn.notification.smallIcon?.loadDrawable(context)?.toBitmap()
 
             val time = SimpleDateFormat(
                 "dd/MM/yyyy  hh:mm:ss a", Locale.ENGLISH
             ).format(sbn.postTime)
 
-            if (!message.contains("new message", true)
-                && !message.contains("photo", true)
-                && !message.contains("video", true)
-                && !message.contains("photos", true)
-                && !message.contains("videos", true)
+
+            if (isMessageValid(message) && user != "WA Business" && user != "Whatsapp"
+                && !it.getBoolean(Notification.EXTRA_IS_GROUP_CONVERSATION)
             ) {
 
                 SingleNotification(
-                    title = user,
-                    text = message,
-                    detail = detailMessage,
-                    postTime = time
+                    title = user, text = message,
+                    detail = icon, postTime = time
                 )
             } else null
 
@@ -67,7 +64,30 @@ class NotificationRepository @Inject constructor(
         } catch (e: Exception) {
             e.printStackTrace()
         }
-
     }
 
+    private fun isMessageValid(message: String?): Boolean {
+        return message?.let {
+            message !in arrayOf(
+                null,
+                "Checking for new messages",
+                "new message",
+                "new messages",
+                "Photo", "Photos", "Video", "Videos", "chats"
+            ) && !message.contains("Checking for new messages", true)
+                    && !message.contains("new message", true)
+                    && !message.contains(
+                "new messages",
+                true
+            )
+                    && !message.contains("Photo", true)
+                    && !message.contains("Photos", true)
+                    && !message.contains("Video", true)
+                    && !message.contains("Videos", true)
+                    && !message.contains("chats", true)
+                    && !message.contains("messages", true)
+        } ?: true
+
+
+    }
 }

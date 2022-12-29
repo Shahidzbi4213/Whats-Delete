@@ -1,6 +1,13 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
     <style name="Base.Theme.WhatsappReader" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="android:statusBarColor">@color/main</item>
+    </style>
+
+    <style name="Theme.App.Starting" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenAnimatedIcon">@drawable/logo</item>
+        <item name="windowSplashScreenBackground">#151219</item>
+        <item name="postSplashScreenTheme">@style/Base.Theme.WhatsappReader</item>
+        <item name="android:windowFullscreen">true</item>
     </style>
 </resources>

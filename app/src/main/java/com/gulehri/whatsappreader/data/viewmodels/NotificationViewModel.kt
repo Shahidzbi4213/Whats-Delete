@@ -1,19 +1,15 @@
 package com.gulehri.whatsappreader.data.viewmodels
 
-import android.service.notification.StatusBarNotification
+import android.graphics.Bitmap
+import android.graphics.drawable.Icon
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asFlow
 import androidx.lifecycle.viewModelScope
-import com.gulehri.whatsappreader.data.models.SingleNotification
 import com.gulehri.whatsappreader.data.repositories.NotificationRepository
-import com.gulehri.whatsappreader.utils.Constants
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
-import java.text.SimpleDateFormat
-import java.util.*
 import javax.inject.Inject
 
 
@@ -26,6 +22,7 @@ class NotificationViewModel @Inject constructor(private val repo: NotificationRe
     val readNotification = repo.readNotifications.stateIn(
         viewModelScope, SharingStarted.Lazily, emptyList()
     )
+
 
     fun deleteAll() = viewModelScope.launch {
         repo.deleteAll()

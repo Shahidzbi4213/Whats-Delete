@@ -2,6 +2,7 @@ package com.gulehri.whatsappreader.data.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverter
 import androidx.room.TypeConverters
 import com.gulehri.whatsappreader.data.models.SingleNotification
 
@@ -13,6 +14,7 @@ import com.gulehri.whatsappreader.data.models.SingleNotification
     version = 1,
     exportSchema = false
 )
+@TypeConverters(IconConverter::class)
 abstract class AppDatabase : RoomDatabase() {
 
    abstract fun mainDao():NotificationDao

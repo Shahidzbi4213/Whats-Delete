@@ -2,17 +2,14 @@ package com.gulehri.whatsappreader.utils
 
 import android.content.ComponentName
 import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.provider.Settings
-import android.util.Base64
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.FragmentActivity
 import com.google.android.material.snackbar.Snackbar
 import com.gulehri.whatsappreader.service.WhatsAppListener
-import java.io.ByteArrayOutputStream
 
 
 // Created by Shahid Iqbal on 12/26/2022.
@@ -58,5 +55,6 @@ object Extensions {
         (this as AppCompatActivity).supportActionBar?.title = title
     }
 
+    fun Any?.debug() = Log.d("Posted", "$this")
 
 }

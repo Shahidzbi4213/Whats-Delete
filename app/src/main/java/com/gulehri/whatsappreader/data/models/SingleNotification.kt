@@ -1,5 +1,7 @@
 package com.gulehri.whatsappreader.data.models
 
+import android.graphics.Bitmap
+import android.graphics.drawable.Icon
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
@@ -11,7 +13,7 @@ data class SingleNotification(
 
     val title: String?,
     val text: String?,
-    val detail: String?,
+    val detail: Bitmap?,
     @PrimaryKey
     val postTime: String,
 )
