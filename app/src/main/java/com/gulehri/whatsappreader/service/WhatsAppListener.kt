@@ -1,13 +1,11 @@
 package com.gulehri.whatsappreader.service
 
-import android.graphics.Bitmap
-import android.graphics.drawable.Icon
-import android.os.Build
+import android.annotation.SuppressLint
 import android.service.notification.NotificationListenerService
 import android.service.notification.StatusBarNotification
-import androidx.annotation.RequiresApi
 import com.gulehri.whatsappreader.data.repositories.NotificationRepository
 import com.gulehri.whatsappreader.utils.Constants
+import com.gulehri.whatsappreader.utils.Extensions.debug
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -23,19 +21,27 @@ class WhatsAppListener @Inject constructor() : NotificationListenerService() {
     lateinit var repository: NotificationRepository
 
 
+    @SuppressLint("NewApi")
     override fun onNotificationPosted(sbn: StatusBarNotification?) {
         if (sbn?.packageName in arrayOf(
-                Constants.WHATSAPP,
-                Constants.WHATSAPP_BUSINESS
+                Constants.WHATSAPP, Constants.WHATSAPP_BUSINESS, Constants.INSTAGRAM
             )
-        ) repository.saveNotifications(sbn)
+        ) {
+            repository.saveNotifications(sbn)
 
 
+          /*  ("====================================").debug()
 
+            sbn?.notification?.extras?.keySet()?.forEach {
+                ("$it ==> ${  sbn.notification?.extras?.get(it).debug()}" )
+            }
 
+            ("=========================================").debug()*/
+        }
 
         super.onNotificationRemoved(sbn)
 
     }
+
 
 }

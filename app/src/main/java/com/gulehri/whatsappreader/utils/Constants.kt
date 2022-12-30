@@ -7,4 +7,5 @@ object Constants {
 
     const val WHATSAPP = "com.whatsapp"
     const val WHATSAPP_BUSINESS = "com.whatsapp.w4b"
+    const val INSTAGRAM = "com.instagram.android"
 }

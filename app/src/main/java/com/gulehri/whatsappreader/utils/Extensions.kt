@@ -55,6 +55,6 @@ object Extensions {
         (this as AppCompatActivity).supportActionBar?.title = title
     }
 
-    fun Any?.debug() = Log.d("Posted", "$this")
+    fun Any?.debug() = Log.d("Debugger", "$this")
 
 }

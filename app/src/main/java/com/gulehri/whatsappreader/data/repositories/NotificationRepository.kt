@@ -31,7 +31,9 @@ class NotificationRepository @Inject constructor(
 
             val user = it.getString(Notification.EXTRA_TITLE).toString()
             val message = it.getString(Notification.EXTRA_TEXT)
-            val icon = sbn.notification.smallIcon?.loadDrawable(context)?.toBitmap()
+            val appIcon = sbn.notification.smallIcon?.loadDrawable(context)?.toBitmap()
+            val profileImage = sbn.notification.getLargeIcon()?.loadDrawable(context)?.toBitmap()
+
 
             val time = SimpleDateFormat(
                 "dd/MM/yyyy  hh:mm:ss a", Locale.ENGLISH
@@ -44,7 +46,8 @@ class NotificationRepository @Inject constructor(
 
                 SingleNotification(
                     title = user, text = message,
-                    detail = icon, postTime = time
+                    appIcon = appIcon, postTime = time,
+                    profileImage = profileImage
                 )
             } else null
 

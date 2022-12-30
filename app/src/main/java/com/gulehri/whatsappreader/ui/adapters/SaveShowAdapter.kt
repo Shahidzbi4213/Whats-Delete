@@ -40,10 +40,11 @@ class SaveShowAdapter :
                 tvTitle.text = currentItem.title
                 tvMessage.text = currentItem.text
                 tvDateTime.text = currentItem.postTime
+                smallIcon.setImageBitmap(currentItem.appIcon)
+                profileImage.setImageBitmap(currentItem.profileImage)
 
-                  tvMessageDetails.hide()
+                tvMessageDetails.hide()
 
-                imageView.setImageBitmap(currentItem.detail)
 
             }
         }
