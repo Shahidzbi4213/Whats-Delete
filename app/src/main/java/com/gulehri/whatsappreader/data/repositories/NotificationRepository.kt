@@ -29,7 +29,7 @@ class NotificationRepository @Inject constructor(
     fun saveNotifications(sbn: StatusBarNotification?) {
         sbn?.notification?.extras?.let {
 
-            val user = it.getString(Notification.EXTRA_TITLE).toString()
+            val user = it.getString(Notification.EXTRA_TITLE)
             val message = it.getString(Notification.EXTRA_TEXT)
             val appIcon = sbn.notification.smallIcon?.loadDrawable(context)?.toBitmap()
             val profileImage = sbn.notification.getLargeIcon()?.loadDrawable(context)?.toBitmap()
@@ -40,7 +40,7 @@ class NotificationRepository @Inject constructor(
             ).format(sbn.postTime)
 
 
-            if (isMessageValid(message) && user != "WA Business" && user != "Whatsapp"
+            if (isMessageValid(message) && user != "WA Business" && user != "Whatsapp" && user != null
                 && !it.getBoolean(Notification.EXTRA_IS_GROUP_CONVERSATION)
             ) {
 

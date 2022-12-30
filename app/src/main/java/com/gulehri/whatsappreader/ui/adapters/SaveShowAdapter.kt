@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.gulehri.whatsappreader.R
 import com.gulehri.whatsappreader.data.models.SingleNotification
 import com.gulehri.whatsappreader.databinding.SingleNotificationItemBinding
 import com.gulehri.whatsappreader.utils.Extensions.hide
@@ -41,7 +42,10 @@ class SaveShowAdapter :
                 tvMessage.text = currentItem.text
                 tvDateTime.text = currentItem.postTime
                 smallIcon.setImageBitmap(currentItem.appIcon)
-                profileImage.setImageBitmap(currentItem.profileImage)
+
+                currentItem.profileImage?.let {
+                    profileImage.setImageBitmap(it)
+                } ?: profileImage.setImageResource(R.drawable.profile)
 
                 tvMessageDetails.hide()
 
