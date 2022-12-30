@@ -1,10 +1,12 @@
 package com.gulehri.whatsappreader.ui.adapters
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.gulehri.whatsappreader.R
 import com.gulehri.whatsappreader.data.models.SingleNotification
 import com.gulehri.whatsappreader.databinding.SingleNotificationItemBinding
@@ -35,6 +37,7 @@ class SaveShowAdapter :
     inner class ViewHolder(private val binding: SingleNotificationItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
+        @SuppressLint("SetTextI18n")
         fun bindTo(currentItem: SingleNotification) {
             binding.apply {
 
@@ -48,6 +51,18 @@ class SaveShowAdapter :
                 } ?: profileImage.setImageResource(R.drawable.profile)
 
                 tvMessageDetails.hide()
+
+                if (currentItem.text!!.contains("new", true)) {
+
+                    tvMessage.text = "${currentItem.text} (click to see)"
+                    root.setOnClickListener {
+                        MaterialAlertDialogBuilder(root.context)
+                            .setTitle("Stack Messages")
+                            .setMessage(currentItem.stackMsg)
+                            .setPositiveButton("ok", null)
+                            .show()
+                    }
+                }
 
 
             }

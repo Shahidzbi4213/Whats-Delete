@@ -13,6 +13,7 @@ data class SingleNotification(
     val title: String?,
     val text: String?,
     val appIcon: Bitmap?,
+    val stackMsg:String?,
     val profileImage: Bitmap?,
     @PrimaryKey
     val postTime: String,
